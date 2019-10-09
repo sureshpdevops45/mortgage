@@ -1,7 +1,6 @@
 package com.hcl.mortgage.entity;
 
-import java.util.Date;
-
+import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,7 +17,8 @@ public class Customer {
 	private String customerName;
 	private String emailId;
 	private Long mobileNumber;
-	private Date dateOfBirth;
+	private LocalDate dateOfBirth;
+	private String password;
 	
 	public Integer getCustomerId() {
 		return customerId;
@@ -44,11 +44,17 @@ public class Customer {
 	public void setMobileNumber(Long mobileNumber) {
 		this.mobileNumber = mobileNumber;
 	}
-	public Date getDateOfBirth() {
+	public LocalDate getDateOfBirth() {
 		return dateOfBirth;
 	}
-	public void setDateOfBirth(Date dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
+	public void setDateOfBirth(LocalDate date) {
+		this.dateOfBirth = date;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	public Customer() {
 		super();
