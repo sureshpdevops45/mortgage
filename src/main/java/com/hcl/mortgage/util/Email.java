@@ -1,4 +1,4 @@
-package com.hcl.mortgage.utils;
+package com.hcl.mortgage.util;
 
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;

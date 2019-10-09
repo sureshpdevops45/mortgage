@@ -15,8 +15,8 @@ import com.hcl.mortgage.entity.Account;
 import com.hcl.mortgage.entity.Customer;
 import com.hcl.mortgage.repository.AccountRepository;
 import com.hcl.mortgage.repository.CustomerRepository;
-import com.hcl.mortgage.utils.Email;
-import com.hcl.mortgage.utils.Sms;
+import com.hcl.mortgage.util.Email;
+import com.hcl.mortgage.util.Sms;
 
 @Service
 public class CustomerServiceImpl implements CustomerService{

@@ -1,4 +1,4 @@
-package com.hcl.mortgage.utils;
+package com.hcl.mortgage.util;
 
 import com.nexmo.client.NexmoClient;
 import com.nexmo.client.sms.SmsSubmissionResponse;
