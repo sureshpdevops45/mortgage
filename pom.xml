@@ -84,6 +84,13 @@
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
 	</dependencies>
+	<distributionManagement>
+            <repository>
+              <id>snapshots</id>
+              <name>Snapshot repository</name>
+                <url>http://35.154.199.225:8081/nexus/content/repositories/snapshots/</url>
+            </repository>
+	</distributionManagement>
 
 	<build>
 		<plugins>
