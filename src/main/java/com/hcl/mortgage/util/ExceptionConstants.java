@@ -7,5 +7,6 @@ public class ExceptionConstants {
 	}
 	
 	public static final String CUSTOMER_NOT_FOUND = "Invalid credentials";
+	public static final String ACCOUNT_NOT_FOUND = "Customer Id Not Found";
 	public static final String PLEASE_FIND_ACCOUNT_DETAILS = "Please find account details";
 }
