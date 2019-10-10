@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hcl.mortgage.dto.AccountSummaryResponseDto;
 import com.hcl.mortgage.service.AccountSummaryService;
 
-import lombok.extern.slf4j.Slf4j;
+
 
 @RestController
 @CrossOrigin(allowedHeaders = { "*", "*/" }, origins = { "*", "*/" })
 @RequestMapping("/api")
-@Slf4j
+
 public class AccountSummaryController {
 
 	@Autowired

@@ -11,9 +11,6 @@ import com.hcl.mortgage.repository.CustomerRepository;
 import com.hcl.mortgage.util.ExceptionConstants;
 import com.hcl.mortgage.util.PasswordUtil;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @Service
 public class LoginServiceImpl implements LoginService {
 

@@ -47,6 +47,8 @@ public class LoanControllerTest {
 	@Before
 	public void setup() {
 		mockMvc = MockMvcBuilders.standaloneSetup(loanController).build();
+		
+		loanInfoRequestDto=new LoanInfoRequestDto();
 		loanInfoRequestDto.setAnnualSalary(100000D);
 		loanInfoRequestDto.setCustomerId(1);
 		loanInfoRequestDto.setLoanAmount(500000D);

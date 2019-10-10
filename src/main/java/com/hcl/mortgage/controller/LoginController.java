@@ -13,12 +13,11 @@ import com.hcl.mortgage.dto.LoginRequestDto;
 import com.hcl.mortgage.dto.LoginResponseDto;
 import com.hcl.mortgage.service.LoginService;
 
-import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @CrossOrigin(allowedHeaders = { "*", "*/" }, origins = { "*", "*/" })
 @RequestMapping("/api")
-@Slf4j
+
 public class LoginController {
 
 	@Autowired
