@@ -1,5 +1,7 @@
 package com.hcl.mortgage.util;
 
+import java.time.LocalDateTime;
+
 public class ExceptionConstants {
 
 	private ExceptionConstants() {
@@ -16,8 +18,10 @@ public class ExceptionConstants {
 	public static final String LOAN_INVALID="You are not eligible for applying Loan";
 	public static final String LOANNOT_APPLICABLE="Loan Amount is greater than Property Value";
 	public static final String LOAN_AMOUNT_INVALID="Invalid Loan Amount";
-
+    public static final String INVALID_ACCOUNT_BALANCE="Customer Salary Account  balance is not sufficient";
 	public static final String LOANINFO_UNAVAILABLE="No loan info found for the customer";
 	public static final String LOAN_NOT_APPLICABLE="You have already availed the loan";
+	
+	public static final String LOAN_DEDUCTION = "Loan deducted on " + LocalDateTime.now();
 
 }

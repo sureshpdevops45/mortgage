@@ -15,6 +15,8 @@ import com.hcl.mortgage.repository.AccountRepository;
 import com.hcl.mortgage.repository.CustomerRepository;
 import com.hcl.mortgage.util.ExceptionConstants;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.mail.javamail.JavaMailSender;
 
@@ -25,12 +27,14 @@ import com.hcl.mortgage.util.Email;
 import com.hcl.mortgage.util.Sms;
 
 /**
- * @author Subashri Sridharan
+ * @author Jyoshna, Subashri
  *
  */
 
 @Service
 public class LoanServiceImpl implements LoanService {
+
+	private static final Logger logger = LoggerFactory.getLogger(LoanServiceImpl.class);
 
 	@Autowired
 	CustomerRepository customerRepository;
@@ -45,36 +49,22 @@ public class LoanServiceImpl implements LoanService {
 	Sms sms = new Sms();
 	Email email = new Email();
 
-	@Override
-	public LoanDetails getLoanSummary(int customerId) {
-		LoanDetails loanInfo;
-		Optional<Customer> customer = customerRepository.findByCustomerId(customerId);
-		if (!customer.isPresent()) {
-			throw new CommonException(ExceptionConstants.ACCOUNT_NOT_FOUND);
-		} else {
-			loanInfo = loanRepository.findByCustomerId(customerId);
-		}
-		if (loanInfo == null) {
-			throw new CommonException(ExceptionConstants.LOANINFO_UNAVAILABLE);
-		}
-		return loanInfo;
-	}
-
 	/*
-	 * This method is used to get the loan information for customer by providing
-	 * valid credentials
+	 * This method is used for loan enquiry(emi, totalloanAmount, rateOfInterest) if
+	 * they are ok with details of loan they they will apply loan.
 	 * 
-	 * @Request LoanInfoRequestDto
-	 * propertyValue,propertyType,annualSalary,loanTenure,loanAmount
+	 * @Param LoanInfoRequestDto object which includes customerId,
+	 * propertyValue,propertyType,loanTenure,loanAmount,annualSalary
 	 * 
 	 * @return LoanInfoResponseDto is the return object which includes
-	 * totalAmount,emi,message,statusCode
+	 * rateOfInterest,totalAmount,emi message,statusCode
 	 * 
 	 */
 
 	@Override
 
 	public LoanInfoResponseDto loanInfo(LoanInfoRequestDto loanInforequestDto) {
+		logger.info("inside loan enquiry service");
 		Customer customers = null;
 		Optional<Customer> customer = customerRepository.findByCustomerId(loanInforequestDto.getCustomerId());
 		Double customerLoanAmount = loanInforequestDto.getLoanAmount();
@@ -91,9 +81,7 @@ public class LoanServiceImpl implements LoanService {
 			throw new CommonException(ExceptionConstants.ACCOUNT_NOT_FOUND);
 		}
 
-		if (customer.isPresent()) {
-			customers = customer.get();
-		}
+		customers = customer.get();
 
 		Period period = Period.between(customers.getDateOfBirth(), LocalDate.now());
 
@@ -131,14 +119,26 @@ public class LoanServiceImpl implements LoanService {
 		return loanInfoResponseDto;
 	}
 
+	/*
+	 * This method is used to apply loan
+	 * 
+	 * @Param LoanResponse object which includes customerId,
+	 * propertyValue,propertyType,loanTenure,loanAmount,annualSalary,totalAmount
+	 * 
+	 * @return LoanResponse is the return object which includes message,statusCode
+	 * 
+	 */
+
 	public String applyLoan(LoanRequestDto loanRequestDto) {
+		logger.info("inside loan apply service");
 		LoanDetails loanDetail = new LoanDetails();
 		BeanUtils.copyProperties(loanRequestDto, loanDetail);
 		Customer customer = null;
 		Optional<Customer> customerInfo = customerRepository.findByCustomerId(loanRequestDto.getCustomerId());
-		if (customerInfo.isPresent()) {
-			customer = customerInfo.get();
+		if (!customerInfo.isPresent()) {
+			throw new CommonException(ExceptionConstants.CUSTOMER_NOT_FOUND);
 		}
+		customer = customerInfo.get();
 		LoanDetails loanData = loanRepository.findByCustomerId(customer.getCustomerId());
 		if (loanData != null) {
 			throw new CommonException(ExceptionConstants.LOAN_NOT_APPLICABLE);
@@ -150,6 +150,35 @@ public class LoanServiceImpl implements LoanService {
 		email.sendEmail(customer.getEmailId(), accountNumber, customer.getPassword(), javaMailSender, "Loan");
 		loanRepository.save(loanDetail);
 		return "Loan Applied Successfully";
+	}
+
+	/*
+	 * This method is used to get the applied loan summary
+	 * 
+	 * 
+	 * @Param customerId
+	 * 
+	 * 
+	 * @return LoanResponseDto is the return object which includes
+	 * loanTenure,loanAmount,loanAccountNumber rateOfInterest,totalAmount,emi
+	 * message,statusCode
+	 * 
+	 */
+
+	@Override
+	public LoanDetails getLoanSummary(Integer customerId) {
+		logger.info("inside loan summary service");
+		LoanDetails loanInfo;
+		Optional<Customer> customer = customerRepository.findByCustomerId(customerId);
+		if (!customer.isPresent()) {
+			throw new CommonException(ExceptionConstants.ACCOUNT_NOT_FOUND);
+		} else {
+			loanInfo = loanRepository.findByCustomerId(customerId);
+		}
+		if (loanInfo == null) {
+			throw new CommonException(ExceptionConstants.LOANINFO_UNAVAILABLE);
+		}
+		return loanInfo;
 	}
 
 }

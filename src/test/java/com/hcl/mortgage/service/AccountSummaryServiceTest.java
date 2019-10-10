@@ -16,10 +16,13 @@ import org.slf4j.LoggerFactory;
 import com.hcl.mortgage.dto.AccountSummaryResponseDto;
 import com.hcl.mortgage.entity.Account;
 import com.hcl.mortgage.entity.Customer;
-
+import com.hcl.mortgage.exception.CommonException;
 import com.hcl.mortgage.repository.AccountRepository;
 import com.hcl.mortgage.repository.CustomerRepository;
-
+/**
+ * @author Jyoshna
+ *
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class AccountSummaryServiceTest {
 
@@ -70,13 +73,17 @@ public class AccountSummaryServiceTest {
 		AccountSummaryResponseDto accountSummaryResponseDto = accountSummaryServiceImpl.getAccountSummary(customerId);
 		Assert.assertEquals(Long.valueOf(84053768334955L), accountSummaryResponseDto.getAccountNumber());
 		Assert.assertEquals(Double.valueOf(2000D), accountSummaryResponseDto.getAccountBalance());
+		Assert.assertEquals("Jyoshna", accountSummaryResponseDto.getCustomerName());
+		Assert.assertEquals(Integer.valueOf(201), accountSummaryResponseDto.getStatusCode());
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test(expected = CommonException.class)
 	public void negativeTestGetAccountSummary() {
 		logger.info("inside account summary test");
+		customer=null;
+		Optional<Customer> customers = Optional.ofNullable(customer);
 		Mockito.when(accountRepository.findByCustomerId(Mockito.anyInt())).thenReturn(account);
-		Mockito.when(customerRepository.findByCustomerId(Mockito.anyInt())).thenReturn(null);
+		Mockito.when(customerRepository.findByCustomerId(Mockito.anyInt())).thenReturn(customers);
 		AccountSummaryResponseDto accountSummaryResponseDto = accountSummaryServiceImpl.getAccountSummary(customerId);
 		Assert.assertEquals(Long.valueOf(84053768334955L), accountSummaryResponseDto.getAccountNumber());
 		Assert.assertEquals(Double.valueOf(2000D), accountSummaryResponseDto.getAccountBalance());

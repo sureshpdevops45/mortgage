@@ -2,13 +2,13 @@ package com.hcl.mortgage.exception;
 
 import java.io.Serializable;
 
-public class ResponseError implements Serializable {
+public class Response implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	private String message;
 	private int statusCode;
-	
+
 	public String getMessage() {
 		return message;
 	}
@@ -25,10 +25,14 @@ public class ResponseError implements Serializable {
 		this.statusCode = statusCode;
 	}
 
-	public ResponseError(String message, int statusCode) {
+	public Response(String message, int statusCode) {
 		this.message = message;
 		this.statusCode = statusCode;
 
+	}
+
+	public Response() {
+		super();
 	}
 
 }

@@ -12,11 +12,15 @@ import org.springframework.stereotype.Component;
 import com.hcl.mortgage.entity.Account;
 import com.hcl.mortgage.entity.LoanDetails;
 import com.hcl.mortgage.entity.Transaction;
-import com.hcl.mortgage.exception.AccountInsuffcientException;
+import com.hcl.mortgage.exception.CommonException;
 import com.hcl.mortgage.repository.AccountRepository;
 import com.hcl.mortgage.repository.LoanRepository;
 import com.hcl.mortgage.repository.TransactionRepository;
 
+/**
+ * @author Shilendra
+ *
+ */
 @Component
 public class Scheduler {
 
@@ -56,9 +60,9 @@ public class Scheduler {
 
 				Transaction transaction = new Transaction();
 				transaction.setAmountDeducted(loan.getEmi());
-				transaction.setCustomerId((long) customer);
+				transaction.setCustomerId((Integer) customer);
 
-				transaction.setDescription(MortgageUtil.loanDeduction);
+				transaction.setDescription(ExceptionConstants.LOAN_DEDUCTION);
 
 				transaction.setTransactionDate(LocalDateTime.now());
 
@@ -66,7 +70,7 @@ public class Scheduler {
 			}
 
 			else {
-				throw new AccountInsuffcientException(" Customer Salary Account  balance is not sufficient ");
+				throw new CommonException(ExceptionConstants.INVALID_ACCOUNT_BALANCE);
 			}
 		});
 

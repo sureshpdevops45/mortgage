@@ -2,6 +2,8 @@ package com.hcl.mortgage.service;
 
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +14,14 @@ import com.hcl.mortgage.exception.CommonException;
 import com.hcl.mortgage.repository.AccountRepository;
 import com.hcl.mortgage.repository.CustomerRepository;
 import com.hcl.mortgage.util.ExceptionConstants;
-
+/**
+ * @author Jyoshna
+ *
+ */
 @Service
 public class AccountSummaryServiceimpl implements AccountSummaryService {
+
+	private static final Logger logger = LoggerFactory.getLogger(AccountSummaryServiceimpl.class);
 
 	@Autowired
 	CustomerRepository customerRepository;
@@ -36,6 +43,7 @@ public class AccountSummaryServiceimpl implements AccountSummaryService {
 	@Override
 	public AccountSummaryResponseDto getAccountSummary(Integer customerId) {
 
+		logger.info("inside get account summary service");
 		Account account = accountRepository.findByCustomerId(customerId);
 		Optional<Customer> customer = customerRepository.findByCustomerId(customerId);
 

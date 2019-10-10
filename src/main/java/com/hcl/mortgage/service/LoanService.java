@@ -8,6 +8,6 @@ import com.hcl.mortgage.entity.LoanDetails;
 public interface LoanService {
 
 	LoanInfoResponseDto loanInfo(LoanInfoRequestDto loanInforequestDto);
-	LoanDetails getLoanSummary(int customerId);
+	LoanDetails getLoanSummary(Integer customerId);
 	String applyLoan(LoanRequestDto loanRequestDto);
 }

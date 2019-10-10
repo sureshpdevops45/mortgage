@@ -16,7 +16,7 @@ public class Transaction {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer transactionId;
 	private LocalDateTime transactionDate;
-	private Long customerId;
+	private Integer customerId;
 	private Double amountDeducted;
 	private String description;
 
@@ -36,11 +36,11 @@ public class Transaction {
 		this.transactionDate = transactionDate;
 	}
 
-	public Long getCustomerId() {
+	public Integer getCustomerId() {
 		return customerId;
 	}
 
-	public void setCustomerId(Long customerId) {
+	public void setCustomerId(Integer customerId) {
 		this.customerId = customerId;
 	}
 

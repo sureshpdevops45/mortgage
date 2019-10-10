@@ -10,7 +10,7 @@ import com.hcl.mortgage.entity.Transaction;
 
 @Repository
 public interface TransactionRepository extends JpaRepository<Transaction, Integer> {
-	
+
 	public List<TransactionSummaryDto> findByCustomerId(Integer customerId);
 
 }

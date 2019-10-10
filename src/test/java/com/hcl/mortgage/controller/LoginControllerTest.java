@@ -8,6 +8,8 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
@@ -18,10 +20,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hcl.mortgage.dto.LoginRequestDto;
 import com.hcl.mortgage.service.LoginService;
 
+/**
+ * @author Jyoshna
+ *
+ */
 @RunWith(MockitoJUnitRunner.class)
 @WebAppConfiguration
 public class LoginControllerTest {
 
+	private static final Logger logger = LoggerFactory.getLogger(LoginControllerTest.class);
 	@InjectMocks
 	LoginController loginController;
 
@@ -42,6 +49,7 @@ public class LoginControllerTest {
 
 	@Test
 	public void testVerify() throws Exception {
+		logger.info("inside login controller test");
 		mockMvc.perform(MockMvcRequestBuilders.post("/api/login").contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON).content(asJsonString(loginRequestDto)))
 				.andExpect(status().isCreated());
