@@ -31,7 +31,7 @@ public class LoginServiceImpl implements LoginService {
 
 	@Override
 	public LoginResponseDto login(LoginRequestDto loginRequestDto) {
-		log.info("inside login service");
+		
 		Customer customer = customerRepository.findByEmailIdAndPassword(loginRequestDto.getEmailId(),
 				loginRequestDto.getPassword());
 		if (customer == null) {

@@ -35,7 +35,7 @@ public class AccountSummaryController {
 	
 	@GetMapping("/customers/{customerId}")
 	public ResponseEntity<AccountSummaryResponseDto> getAccountSummary(@PathVariable Integer customerId) {
-		log.info("inside account summary controller");
+	
 		return new ResponseEntity<>(accountSummaryService.getAccountSummary(customerId), HttpStatus.OK);
 	}
 }
