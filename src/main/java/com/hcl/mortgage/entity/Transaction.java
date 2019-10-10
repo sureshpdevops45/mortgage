@@ -8,6 +8,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
 @Table
 public class Transaction {
@@ -16,9 +20,10 @@ public class Transaction {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer transactionId;
 	private LocalDateTime transactionDate;
-	private Long accountNumber;
+	private Long customerId;
 	private Double amountDeducted;
 	private String description;
+	
 	public Integer getTransactionId() {
 		return transactionId;
 	}
@@ -31,11 +36,11 @@ public class Transaction {
 	public void setTransactionDate(LocalDateTime transactionDate) {
 		this.transactionDate = transactionDate;
 	}
-	public Long getAccountNumber() {
-		return accountNumber;
+	public Long getCustomerId() {
+		return customerId;
 	}
-	public void setAccountNumber(Long accountNumber) {
-		this.accountNumber = accountNumber;
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
 	}
 	public Double getAmountDeducted() {
 		return amountDeducted;
@@ -49,8 +54,6 @@ public class Transaction {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Transaction() {
-		super();
-	}
+	
 	
 }
