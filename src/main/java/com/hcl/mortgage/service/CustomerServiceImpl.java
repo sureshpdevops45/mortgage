@@ -53,7 +53,7 @@ public class CustomerServiceImpl implements CustomerService{
 		String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
 		Customer customer=new Customer();
 		BeanUtils.copyProperties(customerRequestDto, customer);
-		DateTimeFormatter formatter=DateTimeFormatter.ofPattern("MM/dd/yyyy");
+		DateTimeFormatter formatter=DateTimeFormatter.ofPattern("yyyy/MM/dd");
 		LocalDate date=LocalDate.parse(customerRequestDto.getDob(), formatter);
 		Period period=Period.between(date, LocalDate.now());
 		if(period.getYears()<18) {
@@ -78,7 +78,7 @@ public class CustomerServiceImpl implements CustomerService{
 		accountRepository.save(account);
 		sms.sendSms(customerRequestDto.getMobileNumber(),accountNumber,randomPassword,"Salary");
 		email.sendEmail(customerRequestDto.getEmailId(),accountNumber,randomPassword,javaMailSender,"Salary");
-		return "Success";
+		return "Registered Successfully";
 	}
 
 }
