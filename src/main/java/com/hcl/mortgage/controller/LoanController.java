@@ -34,7 +34,7 @@ public class LoanController {
 	}
 	
 	@GetMapping("/loans/{customerId}/summary")
-	public ResponseEntity<LoanResponseDto> loanSummary(@PathVariable int customerId){
+	public ResponseEntity<LoanResponseDto> loanSummary(@PathVariable Integer customerId){
 		LoanResponseDto loanResponse=new LoanResponseDto();
 		LoanDetails loan=loanServcie.getLoanSummary(customerId);
 		loanResponse.setAccountNumber(loan.getLoanAccountNumber());
