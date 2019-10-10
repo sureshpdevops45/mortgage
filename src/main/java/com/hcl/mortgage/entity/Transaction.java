@@ -24,6 +24,7 @@ public class Transaction {
 	private Double amountDeducted;
 	private String description;
 	
+	
 	public Integer getTransactionId() {
 		return transactionId;
 	}

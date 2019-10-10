@@ -19,7 +19,7 @@ import com.hcl.mortgage.repository.LoanRepository;
 import com.hcl.mortgage.repository.TransactionRepository;
 
 @Component
-public class Scheduling {
+public class Scheduler {
 
 	@Autowired
 	private TransactionRepository transactionRepository;
@@ -34,7 +34,7 @@ public class Scheduling {
 	private AccountRepository accountRepository;
 	
 	
-	@Scheduled(cron = "0 0/100000000 * * * *")
+	@Scheduled(cron = "0 0/2 * * * *")
 	public void emiScheduler()
 	{
 		List<LoanDetails> loans = loanRepository.findAll();
@@ -66,10 +66,15 @@ public class Scheduling {
 			 Transaction transaction = new Transaction();
 			 transaction.setAmountDeducted(loan.getEmi());
 			 transaction.setCustomerId((long) customer);
+			
 			 transaction.setDescription(MortgageUtil.loanDeduction);
 			 
 			 transaction.setTransactionDate(LocalDateTime.now());
-			 transactionDetails.add(transaction);}
+			 
+			 transactionDetails.add(transaction);
+			 }
+	 
+	 
 	 
 	 else
 	 {
