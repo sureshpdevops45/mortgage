@@ -19,7 +19,14 @@ public class Customer {
 	private String emailId;
 	private Long mobileNumber;
 	private Date dateOfBirth;
+	private String password;
 	
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	public Integer getCustomerId() {
 		return customerId;
 	}
