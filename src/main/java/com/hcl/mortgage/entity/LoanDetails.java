@@ -1,5 +1,7 @@
 package com.hcl.mortgage.entity;
 
+import java.time.LocalDate;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,6 +24,9 @@ public class LoanDetails {
 	private String propertyType;
 	private Double propertyValue;
 	private Integer customerId;
+  //  private LocalDate loanDate;
+	
+	
 	
 	public Integer getLoanId() {
 		return loanId;

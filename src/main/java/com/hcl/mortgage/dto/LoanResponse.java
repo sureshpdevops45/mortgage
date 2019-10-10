@@ -1,34 +1,18 @@
-package com.hcl.mortgage.exception;
+package com.hcl.mortgage.dto;
 
-import java.io.Serializable;
-
-public class ResponseError implements Serializable {
-
-	private static final long serialVersionUID = 1L;
-
+public class LoanResponse {
 	private String message;
 	private int statusCode;
-	
 	public String getMessage() {
 		return message;
 	}
-
 	public void setMessage(String message) {
 		this.message = message;
 	}
-
 	public int getStatusCode() {
 		return statusCode;
 	}
-
 	public void setStatusCode(int statusCode) {
 		this.statusCode = statusCode;
 	}
-
-	public ResponseError(String message, int statusCode) {
-		this.message = message;
-		this.statusCode = statusCode;
-
-	}
-
 }

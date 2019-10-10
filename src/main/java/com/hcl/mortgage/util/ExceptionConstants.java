@@ -12,7 +12,12 @@ public class ExceptionConstants {
 	public static final String AGE_INVALID="Enter the valid Date of Birth";
 	public static final String MOBILE_INVALID="Enter the valid Mobile Number";
 	public static final String EMAIL_INVALID="Enter the valid Email Id";
+
 	public static final String LOAN_INVALID="You are not eligible for applying Loan";
-	public static final String LOAN_NOT_APPLICABLE="Loan Amount is greater than Property Value";
+	public static final String LOANNOT_APPLICABLE="Loan Amount is greater than Property Value";
 	public static final String LOAN_AMOUNT_INVALID="Invalid Loan Amount";
+
+	public static final String LOANINFO_UNAVAILABLE="No loan info found for the customer";
+	public static final String LOAN_NOT_APPLICABLE="You have already availed the loan";
+
 }

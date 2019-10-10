@@ -44,7 +44,7 @@ public class CustomerServiceImpl implements CustomerService{
 	/*
 	 * This method is used register the user
 	 * 
-	 * CustomerRequestDto object as a request body that contains Customer Info
+	 * @Param CustomerRequestDto object as a request body that contains Customer Info
 	 * 
 	 * @return Successful Registration message after registration message,statusCode
 	 * 
@@ -79,7 +79,7 @@ public class CustomerServiceImpl implements CustomerService{
 		accountRepository.save(account);
 		sms.sendSms(customerRequestDto.getMobileNumber(),accountNumber,randomPassword,"Salary");
 		email.sendEmail(customerRequestDto.getEmailId(),accountNumber,randomPassword,javaMailSender,"Salary");
-		return "Success";
+		return "Registered Successfully";
 	}
 
 }

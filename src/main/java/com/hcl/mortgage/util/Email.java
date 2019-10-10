@@ -11,7 +11,7 @@ public class Email {
 		mail.setSubject("Registered Account Information- Account Number & Password");
 		mail.setText("Your Modal Bank "+accountType+" Account Number is "+accountNumber +" and the password is "+randomPassword);
         javaMailSender.send(mail);
-
+        
 	}
 	
 }
