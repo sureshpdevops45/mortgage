@@ -9,6 +9,7 @@ import com.hcl.mortgage.entity.Customer;
 import com.hcl.mortgage.exception.CommonException;
 import com.hcl.mortgage.repository.CustomerRepository;
 import com.hcl.mortgage.util.ExceptionConstants;
+import com.hcl.mortgage.util.PasswordUtil;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,6 +19,9 @@ public class LoginServiceImpl implements LoginService {
 
 	@Autowired
 	CustomerRepository customerRepository;
+
+	@Autowired
+	PasswordUtil passwordUtil;
 
 	/*
 	 * This method is used to login the customer by providing valid credentials
@@ -31,7 +35,7 @@ public class LoginServiceImpl implements LoginService {
 
 	@Override
 	public LoginResponseDto login(LoginRequestDto loginRequestDto) {
-		
+
 		Customer customer = customerRepository.findByEmailIdAndPassword(loginRequestDto.getEmailId(),
 				loginRequestDto.getPassword());
 		if (customer == null) {

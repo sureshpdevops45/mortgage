@@ -3,6 +3,7 @@ package com.hcl.mortgage.service;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.util.Base64;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.BeanUtils;
@@ -53,7 +54,7 @@ public class CustomerServiceImpl implements CustomerService{
 		String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
 		Customer customer=new Customer();
 		BeanUtils.copyProperties(customerRequestDto, customer);
-		DateTimeFormatter formatter=DateTimeFormatter.ofPattern("MM/dd/yyyy");
+		DateTimeFormatter formatter=DateTimeFormatter.ofPattern("yyyy/MM/dd");
 		LocalDate date=LocalDate.parse(customerRequestDto.getDob(), formatter);
 		Period period=Period.between(date, LocalDate.now());
 		if(period.getYears()<18) {
@@ -69,7 +70,7 @@ public class CustomerServiceImpl implements CustomerService{
 		String randomPassword = RandomStringUtils.randomAlphanumeric(10);	
 		Account account=new Account();
 		long accountNumber = (long) Math.floor(Math.random() * 9_000_000_000L) + 1_000_000_000L;
-		customer.setPassword(randomPassword);
+		customer.setPassword(Base64.getEncoder().encodeToString(randomPassword.getBytes()));
 		customer.setDateOfBirth(date);
 		customerRepository.save(customer);
 		account.setAccountNumber(accountNumber);

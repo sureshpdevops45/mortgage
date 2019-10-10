@@ -5,6 +5,8 @@ import java.io.Serializable;
 public class LoanInfoRequestDto implements Serializable{
 
 	private static final long serialVersionUID = 1L;
+	
+	private Integer customerId;
 	private Double propertyValue;
 	private String propertyType;
 	private Double annualSalary;
@@ -40,6 +42,12 @@ public class LoanInfoRequestDto implements Serializable{
 	}
 	public void setLoanAmount(Double loanAmount) {
 		this.loanAmount = loanAmount;
+	}
+	public Integer getCustomerId() {
+		return customerId;
+	}
+	public void setCustomerId(Integer customerId) {
+		this.customerId = customerId;
 	}
 	public LoanInfoRequestDto() {
 		super();

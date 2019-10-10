@@ -37,6 +37,6 @@ public class LoginController {
 	public ResponseEntity<LoginResponseDto> verify(@RequestBody LoginRequestDto loginRequestDto) {
 		
 		LoginResponseDto loginResponseDto = loginService.login(loginRequestDto);
-		return new ResponseEntity<>(loginResponseDto, HttpStatus.FOUND);
+		return new ResponseEntity<>(loginResponseDto, HttpStatus.CREATED);
 	}
 }
