@@ -35,7 +35,7 @@ public class LoginController {
 	
 	@PostMapping("/login")
 	public ResponseEntity<LoginResponseDto> verify(@RequestBody LoginRequestDto loginRequestDto) {
-		log.info("inside login controller");
+		
 		LoginResponseDto loginResponseDto = loginService.login(loginRequestDto);
 		return new ResponseEntity<>(loginResponseDto, HttpStatus.FOUND);
 	}

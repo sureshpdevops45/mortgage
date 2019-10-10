@@ -2,7 +2,6 @@ package com.hcl.mortgage.service;
 
 import java.util.Optional;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +36,7 @@ public class AccountSummaryServiceimpl implements AccountSummaryService{
 	
 	@Override
 	public AccountSummaryResponseDto getAccountSummary(Integer customerId) {
-		log.info("inside account summary service");
+		
 		
 		Account account=accountRepository.findByCustomerId(customerId);
 		Optional<Customer> customer=customerRepository.findByCustomerId(customerId);

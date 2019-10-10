@@ -13,11 +13,19 @@ import org.springframework.stereotype.Service;
 import com.hcl.mortgage.dto.CustomerRequestDto;
 import com.hcl.mortgage.entity.Account;
 import com.hcl.mortgage.entity.Customer;
+import com.hcl.mortgage.exception.CommonException;
 import com.hcl.mortgage.repository.AccountRepository;
 import com.hcl.mortgage.repository.CustomerRepository;
 import com.hcl.mortgage.util.Email;
+import com.hcl.mortgage.util.ExceptionConstants;
 import com.hcl.mortgage.util.Sms;
 
+
+
+/**
+ * @author Subashri Sridharan
+ *
+ */
 @Service
 public class CustomerServiceImpl implements CustomerService{
 
@@ -30,6 +38,17 @@ public class CustomerServiceImpl implements CustomerService{
 	Sms sms=new Sms();
 	Email email=new Email();
 	@Override
+	
+	
+	/*
+	 * This method is used register the user
+	 * 
+	 * CustomerRequestDto object as a request body that contains Customer Info
+	 * 
+	 * @return Successful Registration message after registration message,statusCode
+	 * 
+	 * Age , Mobile ,Email Validation
+	 */
 	public String registerCustomer(CustomerRequestDto customerRequestDto) {
 		String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
 		Customer customer=new Customer();
@@ -38,13 +57,13 @@ public class CustomerServiceImpl implements CustomerService{
 		LocalDate date=LocalDate.parse(customerRequestDto.getDob(), formatter);
 		Period period=Period.between(date, LocalDate.now());
 		if(period.getYears()<18) {
-			
+			throw new CommonException(ExceptionConstants.AGE_INVALID);
 		}
 		if(!customerRequestDto.getEmailId().matches(regex)) {
-			
+			throw new CommonException(ExceptionConstants.EMAIL_INVALID);
 		}
 		if(Long.toString(customerRequestDto.getMobileNumber()).length()<10) {
-			
+			throw new CommonException(ExceptionConstants.MOBILE_INVALID);
 		}
 		
 		String randomPassword = RandomStringUtils.randomAlphanumeric(10);	
@@ -59,7 +78,7 @@ public class CustomerServiceImpl implements CustomerService{
 		accountRepository.save(account);
 		sms.sendSms(customerRequestDto.getMobileNumber(),accountNumber,randomPassword,"Salary");
 		email.sendEmail(customerRequestDto.getEmailId(),accountNumber,randomPassword,javaMailSender,"Salary");
-		return null;
+		return "Success";
 	}
 
 }
