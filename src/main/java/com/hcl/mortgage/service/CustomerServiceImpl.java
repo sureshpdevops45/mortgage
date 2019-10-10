@@ -57,8 +57,8 @@ public class CustomerServiceImpl implements CustomerService{
 		account.setAccountBalance(100000.0);
 		account.setCustomerId(customer.getCustomerId());
 		accountRepository.save(account);
-		sms.sendSms(customerRequestDto.getMobileNumber(),accountNumber,randomPassword);
-		email.sendEmail(customerRequestDto.getEmailId(),accountNumber,randomPassword,javaMailSender);
+		sms.sendSms(customerRequestDto.getMobileNumber(),accountNumber,randomPassword,"Salary");
+		email.sendEmail(customerRequestDto.getEmailId(),accountNumber,randomPassword,javaMailSender,"Salary");
 		return null;
 	}
 
