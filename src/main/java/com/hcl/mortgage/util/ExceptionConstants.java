@@ -12,4 +12,5 @@ public class ExceptionConstants {
 	public static final String AGE_INVALID="Enter the valid Date of Birth";
 	public static final String MOBILE_INVALID="Enter the valid Mobile Number";
 	public static final String EMAIL_INVALID="Enter the valid Email Id";
+	public static final String LOANINFO_UNAVAILABLE="No loan info found for the customer";
 }
