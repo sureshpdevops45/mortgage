@@ -43,7 +43,7 @@ public class CustomerServiceImpl implements CustomerService{
 	/*
 	 * This method is used register the user
 	 * 
-	 * CustomerRequestDto object as a request body that contains Customer Info
+	 * @Param CustomerRequestDto object as a request body that contains Customer Info
 	 * 
 	 * @return Successful Registration message after registration message,statusCode
 	 * 
