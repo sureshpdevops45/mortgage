@@ -6,7 +6,10 @@ import org.springframework.stereotype.Repository;
 import com.hcl.mortgage.entity.LoanDetails;
 
 
+
+
+
 @Repository
 public interface LoanRepository extends JpaRepository<LoanDetails, Integer> {
-
+		LoanDetails findByCustomerId(int customerId);
 }

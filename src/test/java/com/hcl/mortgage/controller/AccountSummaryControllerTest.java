@@ -18,9 +18,6 @@ import com.hcl.mortgage.dto.AccountSummaryResponseDto;
 import com.hcl.mortgage.service.AccountSummaryService;
 
 
-
-
-
 @RunWith(MockitoJUnitRunner.class)
 @WebAppConfiguration
 public class AccountSummaryControllerTest {
