@@ -42,7 +42,7 @@ public class AccountSummaryServiceimpl implements AccountSummaryService{
 		Optional<Customer> customer=customerRepository.findByCustomerId(customerId);
 		
 		if (!customer.isPresent()) {
-			throw new CommonException(ExceptionConstants.CUSTOMER_NOT_FOUND);
+			throw new CommonException(ExceptionConstants.ACCOUNT_NOT_FOUND);
 		}	
 		
 
