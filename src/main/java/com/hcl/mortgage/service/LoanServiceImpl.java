@@ -148,6 +148,8 @@ public class LoanServiceImpl implements LoanService {
 		loanDetail.setRateOfInterest(4F);
 		loanDetail.setEmi(loanRequestDto.getEmi());
 		loanDetail.setTotalAmount(loanRequestDto.getTotalAmount());
+		loanDetail.setEmiDate(LocalDate.now());
+		loanDetail.setOutStandingBalance(loanRequestDto.getTotalAmount());
 		sms.sendSms(customer.getMobileNumber(), accountNumber, customer.getPassword(), "Loan");
 		email.sendEmail(customer.getEmailId(), accountNumber, customer.getPassword(), javaMailSender, "Loan");
 		loanRepository.save(loanDetail);
