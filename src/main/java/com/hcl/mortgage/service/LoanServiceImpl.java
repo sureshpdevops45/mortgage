@@ -89,14 +89,13 @@ public class LoanServiceImpl implements LoanService {
 			throw new CommonException(ExceptionConstants.LOANNOT_APPLICABLE);
 		}
 
-		if (period.getYears() >= 18 && period.getYears() <= 74) {
+		if (period.getYears() >= 18 && period.getYears() < 75) {
 			if (annualSalary >= 240000 && annualSalary <= 600000) {
 				loanAmount = propertyValue * 0.7;
 				emi = (loanAmount * rateOfInterest * Math.pow(1 + rateOfInterest, months))
 						/ (Math.pow(1 + rateOfInterest, months) - 1);
 				totalAmount = emi * months;
 			}
-		} else if (period.getYears() >= 75) {
 			if (annualSalary >= 600001) {
 				loanAmount = propertyValue * 0.8;
 				emi = (loanAmount * rateOfInterest * Math.pow(1 + rateOfInterest, months))
@@ -107,7 +106,8 @@ public class LoanServiceImpl implements LoanService {
 			throw new CommonException(ExceptionConstants.LOAN_INVALID);
 		}
 		if (customerLoanAmount >= loanAmount) {
-			throw new CommonException(ExceptionConstants.LOANNOT_APPLICABLE +". your maximum eligibility is " + loanAmount);
+			throw new CommonException(
+					ExceptionConstants.LOANNOT_APPLICABLE + ". your maximum eligibility is " + loanAmount);
 		}
 
 		LoanInfoResponseDto loanInfoResponseDto = new LoanInfoResponseDto();

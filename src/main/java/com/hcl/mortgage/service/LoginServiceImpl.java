@@ -53,7 +53,7 @@ public class LoginServiceImpl implements LoginService {
 		LoginResponseDto loginResponseDto = new LoginResponseDto();
 		loginResponseDto.setCustomerId(customer.getCustomerId());
 		loginResponseDto.setStatusCode(201);
-		loginResponseDto.setMessage("Log In is successfull");
+		loginResponseDto.setMessage("Login is successfull...");
 		return loginResponseDto;
 	}
 
