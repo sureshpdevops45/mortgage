@@ -6,6 +6,7 @@ public class LoanInfoResponseDto implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private Double totalAmount;
+	private Double loanAmount;
 	private Double emi;
 	private Float rateOfInterest;
 	private Integer statusCode;
@@ -40,6 +41,12 @@ public class LoanInfoResponseDto implements Serializable{
 	}
 	public void setRateOfInterest(Float rateOfInterest) {
 		this.rateOfInterest = rateOfInterest;
+	}
+	public Double getLoanAmount() {
+		return loanAmount;
+	}
+	public void setLoanAmount(Double loanAmount) {
+		this.loanAmount = loanAmount;
 	}
 	public LoanInfoResponseDto() {
 		super();

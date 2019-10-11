@@ -67,13 +67,13 @@ public class LoanServiceImpl implements LoanService {
 		logger.info("inside loan enquiry service");
 		Customer customers = null;
 		Optional<Customer> customer = customerRepository.findByCustomerId(loanInforequestDto.getCustomerId());
-		Double customerLoanAmount = loanInforequestDto.getLoanAmount();
+		Double loanAmount = loanInforequestDto.getLoanAmount();
 		Double propertyValue = loanInforequestDto.getPropertyValue();
 		Double annualSalary = loanInforequestDto.getAnnualSalary();
 		Float rateOfInterest = 0.04F;
 		Float loanTenure = loanInforequestDto.getLoanTenure();
 		Float months = loanTenure * 12;
-		Double loanAmount = 0.0;
+		Double eligibleAmount = 0.0;
 		Double emi = 0.0;
 		Double totalAmount = 0.0;
 
@@ -85,33 +85,41 @@ public class LoanServiceImpl implements LoanService {
 
 		Period period = Period.between(customers.getDateOfBirth(), LocalDate.now());
 
-		if (customerLoanAmount >= propertyValue) {
+		if (loanAmount >= propertyValue) {
 			throw new CommonException(ExceptionConstants.LOANNOT_APPLICABLE);
 		}
 
 		if (period.getYears() >= 18 && period.getYears() < 75) {
 			if (annualSalary >= 240000 && annualSalary <= 600000) {
-				loanAmount = propertyValue * 0.7;
-				emi = (loanAmount * rateOfInterest * Math.pow(1 + rateOfInterest, months))
-						/ (Math.pow(1 + rateOfInterest, months) - 1);
-				totalAmount = emi * months;
+				eligibleAmount = propertyValue * 0.7;
+				totalAmount = Math.ceil(loanAmount + (loanAmount * rateOfInterest));
+				emi = Math.ceil(totalAmount / months);
+				if (emi >= (0.6 * (annualSalary / 12))) {
+
+					throw new CommonException(ExceptionConstants.LOAN_NOT_ELIGIBLE);
+				}
 			}
 			if (annualSalary >= 600001) {
-				loanAmount = propertyValue * 0.8;
-				emi = (loanAmount * rateOfInterest * Math.pow(1 + rateOfInterest, months))
-						/ (Math.pow(1 + rateOfInterest, months) - 1);
-				totalAmount = emi * months;
+				eligibleAmount = propertyValue * 0.8;
+				totalAmount = Math.ceil(loanAmount + (loanAmount * rateOfInterest));
+				emi = Math.ceil(totalAmount / months);
+				if (emi >= (0.6 * (annualSalary / 12))) {
+
+					throw new CommonException(ExceptionConstants.LOAN_NOT_ELIGIBLE);
+				}
 			}
 		} else {
 			throw new CommonException(ExceptionConstants.LOAN_INVALID);
 		}
-		if (customerLoanAmount >= loanAmount) {
+
+		if (loanAmount >eligibleAmount) {
 			throw new CommonException(
-					ExceptionConstants.LOANNOT_APPLICABLE + ". your maximum eligibility is " + loanAmount);
+					ExceptionConstants.LOANNOT_APPLICABLE + ". your maximum eligibility is " + eligibleAmount);
 		}
 
 		LoanInfoResponseDto loanInfoResponseDto = new LoanInfoResponseDto();
 		loanInfoResponseDto.setTotalAmount(totalAmount);
+		loanInfoResponseDto.setLoanAmount(loanAmount);
 		loanInfoResponseDto.setEmi(emi);
 		loanInfoResponseDto.setRateOfInterest(4F);
 		loanInfoResponseDto.setStatusCode(201);
