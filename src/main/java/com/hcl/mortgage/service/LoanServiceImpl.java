@@ -113,9 +113,9 @@ public class LoanServiceImpl implements LoanService {
 		LoanInfoResponseDto loanInfoResponseDto = new LoanInfoResponseDto();
 		loanInfoResponseDto.setTotalAmount(totalAmount);
 		loanInfoResponseDto.setEmi(emi);
-		loanInfoResponseDto.setRateOfInterest(rateOfInterest);
+		loanInfoResponseDto.setRateOfInterest(4F);
 		loanInfoResponseDto.setStatusCode(201);
-		loanInfoResponseDto.setMessage("Loan Enquiry");
+		loanInfoResponseDto.setMessage("Enquiry Successfull");
 		return loanInfoResponseDto;
 	}
 

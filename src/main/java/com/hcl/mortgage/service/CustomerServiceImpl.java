@@ -75,7 +75,7 @@ public class CustomerServiceImpl implements CustomerService {
 		String randomPassword = RandomStringUtils.randomAlphanumeric(10);
 		Account account = new Account();
 		long accountNumber = (long) Math.floor(Math.random() * 9_000_000_000L) + 1_000_000_000L;
-		customer.setPassword(Base64.getEncoder().encodeToString(randomPassword.getBytes()));
+		customer.setPassword(randomPassword);
 		customer.setDateOfBirth(date);
 		customerRepository.save(customer);
 		account.setAccountNumber(accountNumber);
