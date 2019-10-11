@@ -49,7 +49,7 @@ public class Scheduler {
 			BeanUtils.copyProperties(loan, loanDetails);
 			addedLoans.add(loanDetails);
 
-			int customer = loan.getCustomerId();
+			Integer customer = loan.getCustomerId();
 			Account accounts = accountRepository.findByCustomerId(customer);
 
 			if (accounts.getAccountBalance() > loan.getEmi()) {

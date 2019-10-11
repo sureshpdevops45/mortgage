@@ -3,7 +3,6 @@ package com.hcl.mortgage.service;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
-import java.util.Base64;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;

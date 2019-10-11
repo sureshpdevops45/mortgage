@@ -146,6 +146,8 @@ public class LoanServiceImpl implements LoanService {
 		long accountNumber = (long) Math.floor(Math.random() * 9_000_000_000L) + 1_000_000_000L;
 		loanDetail.setLoanAccountNumber(accountNumber);
 		loanDetail.setRateOfInterest(4F);
+		loanDetail.setEmi(loanRequestDto.getEmi());
+		loanDetail.setTotalAmount(loanRequestDto.getTotalAmount());
 		sms.sendSms(customer.getMobileNumber(), accountNumber, customer.getPassword(), "Loan");
 		email.sendEmail(customer.getEmailId(), accountNumber, customer.getPassword(), javaMailSender, "Loan");
 		loanRepository.save(loanDetail);
