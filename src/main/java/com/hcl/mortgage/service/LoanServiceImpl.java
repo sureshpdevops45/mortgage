@@ -107,7 +107,7 @@ public class LoanServiceImpl implements LoanService {
 			throw new CommonException(ExceptionConstants.LOAN_INVALID);
 		}
 		if (customerLoanAmount >= loanAmount) {
-			throw new CommonException(ExceptionConstants.LOAN_INVALID);
+			throw new CommonException(ExceptionConstants.LOANNOT_APPLICABLE +". your maximum eligibility is " + loanAmount);
 		}
 
 		LoanInfoResponseDto loanInfoResponseDto = new LoanInfoResponseDto();
